@@ -1,0 +1,11 @@
+#main-header {
+  background-color: coral;
+  color: white;
+}
+
+#header-container {
+  width: 80%;
+  max-width: 960px;
+  margin: auto;
+  overflow: hidden;
+}
