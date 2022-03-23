@@ -1,0 +1,21 @@
+{
+  "name": "battleship",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "docker-deploy-server": "cd battleship-server && npm run docker-deploy",
+    "docker-deploy-web": "cd battleship-web && npm run docker-deploy",
+    "docker-deploy": "concurrently \"npm run docker-deploy-server\" \"npm run docker-deploy-server\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/regisdantas/battleship.git"
+  },
+  "author": "Regis Moura Dantas",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/regisdantas/battleship/issues"
+  },
+  "homepage": "https://github.com/regisdantas/battleship#readme"
+}
