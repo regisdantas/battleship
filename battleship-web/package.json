@@ -9,6 +9,8 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "5.0.0",
+    "react-use-websocket": "^3.0.0",
+    "socket.io-client": "^4.4.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -18,8 +20,8 @@
     "eject": "react-scripts eject",
     "pretty": "prettier --write \"./**/*.{js,jsx,json}\"",
     "docker-clean": "docker rm -f battleship-web-ctr && exit 0",
-    "build-web":"docker build -t regismdantas/battleship-web .",
-    "run-web":"docker run -it -v $(pwd)/src:/app/src -d -p 3000:3000 --name battleship-web-ctr regismdantas/battleship-web",
+    "build-web": "docker build -t regismdantas/battleship-web .",
+    "run-web": "docker run -it -v $(pwd)/src:/app/src -d -p 3000:3000 --name battleship-web-ctr regismdantas/battleship-web",
     "docker-deploy": "npm run docker-clean && npm run build-web && npm run run-web"
   },
   "eslintConfig": {

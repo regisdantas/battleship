@@ -1,0 +1,40 @@
+
+.hidden {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+  background: gray;
+  box-sizing: border-box;
+  vertical-align: bottom;
+}
+
+.water {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+  background: cyan;
+  box-sizing: border-box;
+  vertical-align: bottom;
+}
+
+.ship {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+  background: black;
+  box-sizing: border-box;
+  vertical-align: bottom;
+}
+
+.destroyed {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+  background: red;
+  box-sizing: border-box;
+  vertical-align: bottom;
+}

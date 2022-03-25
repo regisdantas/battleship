@@ -8,13 +8,15 @@ body {
   margin: 0;
 }
 
-#main {
-  padding: 0 30px;
+#content-container {
+  background-color: #fff;
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 0 20px;
+  width: 80%;
 }
 
-@media (max-width: 600px) {
-  #main {
-    width: 100%;
-    float: none;
-  }
+#page-container {
+  background-color: #fff;
+  margin: 0 auto;
 }

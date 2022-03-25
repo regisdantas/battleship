@@ -1,9 +1,13 @@
 import "./Battleship.css";
 
-import Header from "./components/views/header";
-import NavBar from "./components/views/nav-bar";
+import Header from "./components/views/elements/header";
+import NavBar from "./components/views/elements/nav-bar";
 import MainMenu from "./components/views/pages/main-menu";
-import Footer from "./components/views/footer";
+import MatchRoom from "./components/views/pages/match-room";
+import GamePlay from "./components/views/pages/game-play";
+import GameController from "./components/controllers/game-controller";
+import Footer from "./components/views/elements/footer";
+
 const navLinks = [
   {name: "About", link: "#"},
   {name: "Author", link: "#"},
@@ -13,11 +17,14 @@ const navLinks = [
 
 function Battleship() {
   return (
-    <div className="page-container">
+    <div id="page-container">
       <Header title="BATTLESHIP.io"/>
       <NavBar navLinks={navLinks}/>
-      <section id="main">
-        <MainMenu/> 
+      <section id="content-container">
+        {/* <MainMenu/> */}
+        {/* <GamePlay board={[[]]} turnMsg="Your turn"/>  */}
+        {/* <MatchRoom token="12345" players={["Regis", "Other"]} msgHistory="Ola meu amigo"/> */}
+        <GameController/>
       </section>
       <Footer/>
     </div>

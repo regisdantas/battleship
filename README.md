@@ -22,6 +22,21 @@
 
 *   [ ] [H] ** ** - .
 
+## Documentation
+
+### Front-End
+
+* View
+  * Pages
+  * Page Elements
+  * Game Visual Elements
+* Model
+  * Game State
+* Controller
+  * Back-end Requests
+  * View Actions Handler
+  * Input Handler
+
 ### License
 
 [GPL-3.0][license] © [Regis Dantas][author]

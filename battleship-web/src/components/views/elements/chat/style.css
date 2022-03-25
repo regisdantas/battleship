@@ -1,0 +1,17 @@
+#chat-container {
+  padding: 10px;
+  width: 50%;
+  box-sizing: border-box;
+}
+
+#chat-container textarea {
+  width: 100%;
+  box-sizing: border-box;
+  resize: none;
+  font-size: 16px;
+  padding: 0px 10px 0px;
+}
+
+#type-msg {
+  height: 80px;
+}

@@ -1,11 +1,11 @@
-.menu-container {
+#menu-container {
     display: flex;
     flex-direction: column;
     width: 100%;
     align-items: center;
 }
 
-.menu-container button {
+#menu-container button {
     width: 100px;
     margin-bottom: 20px;
 }

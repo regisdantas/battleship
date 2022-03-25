@@ -1,0 +1,10 @@
+#join-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#join-container * {
+    margin: 10px;
+}
