@@ -4,16 +4,37 @@ import "./style.css";
 function Chat(props) {
   const { msgHistory, onSendMessage } = props;
   const [newMessage, setNewMessage] = React.useState("");
+  const historyArea = React.createRef();
 
-  const onTyping = (e) => {
+  React.useEffect(() => {
+    historyArea.current.scrollTop = historyArea.current.scrollHeight;
+  },[msgHistory]);
+
+  const OnTyping = (e) => {
     setNewMessage(e.target.value);
   };
+
+  const OnClear = () => {
+    setNewMessage("");
+  }
+
+  const OnSend = (e) => {
+    onSendMessage(newMessage);
+    OnClear();
+  }
+
+  const OnKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      OnSend(e);
+    }
+  }
 
   return (
     <div id="chat-container">
       <textarea
         name="msg-history"
         id="msg-history"
+        ref={historyArea}
         cols="30"
         rows="10"
         readOnly={true}
@@ -26,17 +47,16 @@ function Chat(props) {
         id="type-msg"
         cols="30"
         rows="10"
-        onChange={onTyping}
+        onChange={OnTyping}
+        onKeyDown={OnKeyDown}
+        value={newMessage}
       ></textarea>
       <button
-        onClick={(e) => {
-          onSendMessage(newMessage);
-          e.target.value = "";
-        }}
+        onClick={OnSend}
       >
         Send
       </button>
-      <button>Clear</button>
+      <button onClick={OnClear}>Clear</button>
     </div>
   );
 }

@@ -20,7 +20,7 @@
 
 ### ToDo
 
-*   [ ] [H] **State Check** - Add Ship Health Count to Back-End.
+*   [\] [H] **State Check** - Add Ship Health Count to Back-End.
 *   [ ] [H] **Game/Ship Status** - Add ship count, destroyed count, game status in game play.
 *   [ ] [M+] **Finish when Leave** - Finish game play if any player leaves.
 *   [ ] [M] **Back to Main Menu** - Add "Back to Main Menu" button in views.
@@ -30,9 +30,9 @@
 *   [ ] [L+] **Show Ready** - Show when players are ready.
 *   [ ] [L] **Manual Ship Arrange** - Allow player to manually arrange ships.
 *   [ ] [L] **Single Player** - Add AI and single player mode.
-*   [ ] [L] **Enter to Send** - Send message when type Enter.
-*   [ ] [L] **Clear Button** - Implement Clear Button.
-*   [ ] [L] **Clear when Sent** - Clear message-box after message sent.
+*   [x] [L] **Enter to Send** - Send message when type Enter.
+*   [x] [L] **Clear Button** - Implement Clear Button.
+*   [x] [L] **Clear when Sent** - Clear message-box after message sent.
 *   [ ] [L] **Visual** - Improve Front-End Styles.
 *   [ ] [L] **** - .
 

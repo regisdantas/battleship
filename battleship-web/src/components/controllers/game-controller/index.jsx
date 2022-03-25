@@ -5,7 +5,7 @@ import Pages from "../../views";
 function GameController() {
   let socket = React.useRef();
   const [gameState, setGameState] = React.useState({
-    state: "",
+    state: "connecting",
     turn: false,
     isAdmin: false,
     myBoard: [],
@@ -62,6 +62,7 @@ function GameController() {
   };
 
   const pagesByState = {
+    "connecting": <h3>Connecting to server...</h3>,
     "player-join": <Pages.PlayerJoin OnPlayerJoin={OnPlayerJoin} />,
     "main-menu": <Pages.MainMenu OnMenuSelect={OnMenuSelect} />,
     "match-room": (
@@ -96,7 +97,7 @@ function GameController() {
   return pagesByState[gameState.state] ? (
     pagesByState[gameState.state]
   ) : (
-    <h3>Failed to connect to server...</h3>
+    <h3>Failed to connect to server!</h3>
   );
 }
 

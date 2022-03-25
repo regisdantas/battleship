@@ -14,7 +14,7 @@ function MatchRoom(props) {
             <li key={idx}>{player}</li>
           ))}
         </ul>
-        {isAdmin?<button onClick={onStart} visible={isAdmin}>Start Game</button>:<></>}
+        {isAdmin?<button onClick={onStart}>Start Game</button>:<></>}
       </div>
       <Chat msgHistory={msgHistory} onSendMessage={onSendMessage} />
     </div>
