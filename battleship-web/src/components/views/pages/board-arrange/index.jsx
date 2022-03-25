@@ -3,7 +3,7 @@ import Board from "../../elements/board";
 import "./style.css";
 
 function BoardArrange(props) {
-  const { board, ships, onAutoArrange, onReady} = props;
+  const { board, ships, onAutoArrange, onReady } = props;
   const [arrangedShips, setArrangedShips] = React.useState(ships);
   return (
     <div id="arrange-container">
@@ -13,9 +13,9 @@ function BoardArrange(props) {
       <div id="ships-container">
         <div id="ships-list">
           <ul>
-            {arrangedShips.map((ship) => {
+            {arrangedShips.map((ship, idx) => {
               return (
-                <li key={ship.id}>
+                <li key={idx}>
                   <span>{ship.type}</span>
                   <span>{ship.health}</span>
                 </li>

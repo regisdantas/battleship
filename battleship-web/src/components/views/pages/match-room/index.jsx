@@ -10,11 +10,13 @@ function MatchRoom(props) {
         <h2>Match Token: {token}</h2>
         <h3>Players:</h3>
         <ul>
-          {players.map(player => <li>{player}</li>)}
+          {players.map((player, idx) => (
+            <li key={idx}>{player}</li>
+          ))}
         </ul>
         <button onClick={onStart}>Start Game</button>
       </div>
-      <Chat msgHistory={msgHistory} onSendMessage={onSendMessage}/>
+      <Chat msgHistory={msgHistory} onSendMessage={onSendMessage} />
     </div>
   );
 }

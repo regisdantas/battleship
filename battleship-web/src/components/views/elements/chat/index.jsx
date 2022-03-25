@@ -16,9 +16,10 @@ function Chat(props) {
         id="msg-history"
         cols="30"
         rows="10"
-        value={msgHistory.map(
-          (entry) => `${entry.player}: ${entry.text}`
-        ).join("\n")}
+        readOnly={true}
+        value={msgHistory
+          .map((entry) => `${entry.player}: ${entry.text}`)
+          .join("\n")}
       ></textarea>
       <textarea
         name="type-msg"

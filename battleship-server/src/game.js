@@ -156,8 +156,12 @@ class Game {
   };
 
   BoardArrangeSetup = (player) => {
-    player.client.on("auto-arrange", (data) => this.OnAutoArrange(player, data));
-    player.client.on("player-ready", (data) => this.OnPlayerReady(player, data));
+    player.client.on("auto-arrange", (data) =>
+      this.OnAutoArrange(player, data)
+    );
+    player.client.on("player-ready", (data) =>
+      this.OnPlayerReady(player, data)
+    );
   };
 
   BoardArrangeDetach = (player) => {
@@ -179,7 +183,7 @@ class Game {
     } catch (e) {
       console.error(e);
     }
-  }
+  };
 
   OnAutoArrange = (player, data) => {
     try {
@@ -189,19 +193,18 @@ class Game {
     } catch (e) {
       console.error(e);
     }
-  }
+  };
 
   OnPlayerReady = (player, data) => {
     try {
       console.log(`Player: ${player.name} is going to Ready`);
       this.BoardArrangeDetach(player);
       if (player.match.PlayerReady(player, this.GamePlaySetup) === true) {
-        
       }
     } catch (e) {
       console.error(e);
     }
-  }
+  };
 
   GamePlaySetup = (player) => {
     player.gameState.state = "game-play";
@@ -215,14 +218,14 @@ class Game {
 
   OnShootCell = (player, data) => {
     try {
-      console.log(`Player: ${player.name} is shooting at ${data}`);
-      player.match.ShootCell(player, data.cell);
-      this.OnUpdatePlayer(player);
+      if (player.gameState.turn) {
+        console.log(`Player: ${player.name} is shooting at ${data}`);
+        player.match.ShootCell(player, data.cell);
+      }
     } catch (e) {
       console.error(e);
     }
   };
-
 }
 
 module.exports = (socket) => {

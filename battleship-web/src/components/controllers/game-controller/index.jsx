@@ -60,7 +60,7 @@ function GameController() {
   const OnCellClick = (cell) => {
     socket.current.emit("shoot-cell", { cell: cell });
   };
-  
+
   const pagesByState = {
     "player-join": <Pages.PlayerJoin OnPlayerJoin={OnPlayerJoin} />,
     "main-menu": <Pages.MainMenu OnMenuSelect={OnMenuSelect} />,

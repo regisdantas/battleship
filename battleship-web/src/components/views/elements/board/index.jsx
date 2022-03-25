@@ -6,10 +6,10 @@ function Board(props) {
   return (
     <div id="board-container">
       {board.map((row, rowIndex) => (
-        <div className="row" key={row}>
+        <div key={rowIndex}>
           {row.map((cell, colIndex) => (
             <Cell
-              key={rowIndex + "" + colIndex}
+              key={`${rowIndex}_${colIndex}`}
               onCellClick={onCellClick}
               cell={cell}
             />

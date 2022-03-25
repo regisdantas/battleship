@@ -104,12 +104,7 @@ module.exports = class Match {
   }
 
   PointIsValid(x, y) {
-    if (
-      x >= 0 &&
-      x < boardSize &&
-      y >= 0 &&
-      y < boardSize
-    ) {
+    if (x >= 0 && x < boardSize && y >= 0 && y < boardSize) {
       return true;
     }
     return false;
@@ -119,10 +114,7 @@ module.exports = class Match {
     if (!this.PointIsValid(x, y)) {
       return false;
     }
-    if (
-      board[y][x].state !== "ship" &&
-      board[y][x].state !== "destroyed"
-    ) {
+    if (board[y][x].state !== "ship" && board[y][x].state !== "destroyed") {
       return true;
     }
     return false;
@@ -132,10 +124,7 @@ module.exports = class Match {
     if (!this.PointIsValid(x, y)) {
       return false;
     }
-    if (
-      board[y][x].state === "ship" ||
-      board[y][x].state === "destroyed"
-    ) {
+    if (board[y][x].state === "ship" || board[y][x].state === "destroyed") {
       return true;
     }
     return false;
@@ -152,10 +141,7 @@ module.exports = class Match {
   }
 
   PointIsEmptyValid(board, x, y) {
-    if (
-      this.PointIsValid(x, y) &&
-      this.PointIsEmpty(board, x, y)
-    ) {
+    if (this.PointIsValid(x, y) && this.PointIsEmpty(board, x, y)) {
       return true;
     }
     return false;
@@ -268,7 +254,9 @@ module.exports = class Match {
       this.PointIsValid(cell.x, cell.y) &&
       this.PointIsHidden(player.gameState.enemyBoard, cell.x, cell.y)
     ) {
-      if (this.PointIsShip(enemyPlayer.gameState.myBoard, cell.x, cell.y) === true) {
+      if (
+        this.PointIsShip(enemyPlayer.gameState.myBoard, cell.x, cell.y) === true
+      ) {
         player.gameState.enemyBoard[cell.y][cell.x].state = "destroyed";
         enemyPlayer.gameState.myBoard[cell.y][cell.x].state = "destroyed";
         this.players.map((player) => this.UpdatePlayer(player));
