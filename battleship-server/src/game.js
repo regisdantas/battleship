@@ -113,6 +113,7 @@ class Game {
       console.log(`Player: ${player.name} is going to Create Match`);
       this.PlayerMenuDetach(player);
       let newMatch = new Match(this.OnUpdatePlayer);
+      player.gameState.isAdmin = true;
       this.SetMatchRoom(player, newMatch);
       this.pendingMatches.push(newMatch);
       this.PlayerMatchSetup(player);
@@ -219,7 +220,7 @@ class Game {
   OnShootCell = (player, data) => {
     try {
       if (player.gameState.turn) {
-        console.log(`Player: ${player.name} is shooting at ${data}`);
+        // console.log(`Player: ${player.name} is shooting at ${data.cell.toString()}`);
         player.match.ShootCell(player, data.cell);
       }
     } catch (e) {

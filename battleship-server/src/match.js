@@ -94,7 +94,7 @@ module.exports = class Match {
       this.players.map((player) => {
         Attach(player);
         player.gameState.state = "board-arrange";
-        player.gameState.myBoard = this.CreateEmptyBoard("water");
+        player.gameState.myBoard = this.CreateEmptyBoard("hidden");
         player.gameState.ships = this.CreateShips();
         this.UpdatePlayer(player);
       });
@@ -124,7 +124,21 @@ module.exports = class Match {
     if (!this.PointIsValid(x, y)) {
       return false;
     }
-    if (board[y][x].state === "ship" || board[y][x].state === "destroyed") {
+    if (
+      board[y][x].state === "ship" ||
+      board[y][x].state === "destroyed" ||
+      board[y][x].state === "ship-destroyed"
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  PointIsShipNotDestroyed(board, x, y) {
+    if (!this.PointIsValid(x, y)) {
+      return false;
+    }
+    if (board[y][x].state === "ship") {
       return true;
     }
     return false;
@@ -198,7 +212,7 @@ module.exports = class Match {
   }
 
   AutoArrange(player) {
-    player.gameState.myBoard = this.CreateEmptyBoard("water");
+    player.gameState.myBoard = this.CreateEmptyBoard("hidden");
     player.gameState.ships.map((ship) => {
       this.ArrangeShip(ship, player.gameState.myBoard);
     });
@@ -247,21 +261,75 @@ module.exports = class Match {
     });
   }
 
+  GetShip(player, x, y) {
+    for (let j = 0; j < player.gameState.ships.length; j++) {
+      let testShip = player.gameState.ships[j];
+      let shipX = testShip.position.x;
+      let shipY = testShip.position.y;
+      for (let i = 0; i < testShip.health.length; i++) {
+        if (
+          x === shipX + (testShip.orientation === "horizontal" ? i : 0) &&
+          y === shipY + (testShip.orientation === "vertical" ? i : 0)
+        ) {
+          return { ship: testShip, healthIxdex: i };
+        }
+      }
+    }
+    return { ship: null, healthIxdex: -1 };
+  }
+
+  GetShipHealth(ship) {
+    let health = 0;
+    ship.health.forEach((healthPoint) => {
+      health += healthPoint;
+    });
+    return health;
+  }
+
+  UpdateBoardShips(board, ships, hiddenState) {
+    ships.forEach((ship) => {
+      const shipDestroyedState =
+        this.GetShipHealth(ship) > 0 ? "destroyed" : "ship-destroyed";
+      let shipX = ship.position.x;
+      let shipY = ship.position.y;
+      for (let i = 0; i < ship.health.length; i++) {
+        board[shipY][shipX].state =
+          ship.health[i] > 0 ? hiddenState : shipDestroyedState;
+        shipX += ship.orientation === "horizontal" ? 1 : 0;
+        shipY += ship.orientation === "vertical" ? 1 : 0;
+      }
+    });
+  }
+
   ShootCell(player, cell) {
     const enemyPlayer = this.GetOtherPlayer(player);
-    console.log(cell.toString(), enemyPlayer);
     if (
       this.PointIsValid(cell.x, cell.y) &&
       this.PointIsHidden(player.gameState.enemyBoard, cell.x, cell.y)
     ) {
       if (
-        this.PointIsShip(enemyPlayer.gameState.myBoard, cell.x, cell.y) === true
+        this.PointIsShipNotDestroyed(
+          enemyPlayer.gameState.myBoard,
+          cell.x,
+          cell.y
+        ) === true
       ) {
-        player.gameState.enemyBoard[cell.y][cell.x].state = "destroyed";
-        enemyPlayer.gameState.myBoard[cell.y][cell.x].state = "destroyed";
+        const shipData = this.GetShip(enemyPlayer, cell.x, cell.y);
+        shipData.ship.health[shipData.healthIxdex] = 0;
+        this.UpdateBoardShips(
+          enemyPlayer.gameState.myBoard,
+          enemyPlayer.gameState.ships,
+          "ship"
+        );
+        this.UpdateBoardShips(
+          player.gameState.enemyBoard,
+          enemyPlayer.gameState.ships,
+          "hidden"
+        );
         this.players.map((player) => this.UpdatePlayer(player));
         return true;
       } else {
+        enemyPlayer.gameState.myBoard[cell.y][cell.x].state = "water";
         player.gameState.enemyBoard[cell.y][cell.x].state = "water";
       }
     }

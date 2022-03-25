@@ -24,12 +24,22 @@
   width: 30px;
   height: 30px;
   border: 1px solid black;
-  background: black;
+  background: rgb(82, 82, 82);
   box-sizing: border-box;
   vertical-align: bottom;
 }
 
 .destroyed {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+  background: yellow;
+  box-sizing: border-box;
+  vertical-align: bottom;
+}
+
+.ship-destroyed {
   display: inline-block;
   width: 30px;
   height: 30px;

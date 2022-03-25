@@ -7,6 +7,7 @@ module.exports = class Player {
     this.client = client;
     this.gameState = {
       state: "main-menu",
+      isAdmin: false,
       ready: false,
       myBoard: [],
       enemyBoard: [],

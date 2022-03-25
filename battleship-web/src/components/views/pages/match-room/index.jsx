@@ -3,7 +3,7 @@ import Chat from "../../elements/chat";
 import "./style.css";
 
 function MatchRoom(props) {
-  const { token, players, msgHistory, onStart, onSendMessage } = props;
+  const { isAdmin, token, players, msgHistory, onStart, onSendMessage } = props;
   return (
     <div id="room-container">
       <div id="status-session">
@@ -14,7 +14,7 @@ function MatchRoom(props) {
             <li key={idx}>{player}</li>
           ))}
         </ul>
-        <button onClick={onStart}>Start Game</button>
+        {isAdmin?<button onClick={onStart} visible={isAdmin}>Start Game</button>:<></>}
       </div>
       <Chat msgHistory={msgHistory} onSendMessage={onSendMessage} />
     </div>

@@ -20,7 +20,21 @@
 
 ### ToDo
 
-*   [ ] [H] ** ** - .
+*   [ ] [H] **State Check** - Add Ship Health Count to Back-End.
+*   [ ] [H] **Game/Ship Status** - Add ship count, destroyed count, game status in game play.
+*   [ ] [M+] **Finish when Leave** - Finish game play if any player leaves.
+*   [ ] [M] **Back to Main Menu** - Add "Back to Main Menu" button in views.
+*   [ ] [M] **Remove Player from Match** - Allow Admin to remove Player from Match Room.
+*   [ ] [M] **Find Match** - Arrange matches with randomly selected Players.
+*   [ ] [M] **Turn, Shot, Destroy Transitions** - Add smooth transitions to events.
+*   [ ] [L+] **Show Ready** - Show when players are ready.
+*   [ ] [L] **Manual Ship Arrange** - Allow player to manually arrange ships.
+*   [ ] [L] **Single Player** - Add AI and single player mode.
+*   [ ] [L] **Enter to Send** - Send message when type Enter.
+*   [ ] [L] **Clear Button** - Implement Clear Button.
+*   [ ] [L] **Clear when Sent** - Clear message-box after message sent.
+*   [ ] [L] **Visual** - Improve Front-End Styles.
+*   [ ] [L] **** - .
 
 ## Documentation
 
@@ -30,9 +44,8 @@
   * Pages
   * Page Elements
   * Game Visual Elements
-* Model
-  * Game State
 * Controller
+  * Game State
   * Back-end Requests
   * View Actions Handler
   * Input Handler

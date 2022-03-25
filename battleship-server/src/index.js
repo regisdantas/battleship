@@ -1,3 +1,4 @@
+require("dotenv").config();
 const server = require("express")();
 const http = require("http").createServer(server);
 const cors = require("cors");
@@ -18,5 +19,5 @@ server.get("/", function (req, res) {
 });
 
 http.listen(3001, function () {
-  console.log("Servidor rodando em: http://localhost:3001");
+  console.log(`Servidor rodando em: ${process.env.APP_URL}`);
 });

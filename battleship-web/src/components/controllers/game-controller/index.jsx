@@ -7,6 +7,7 @@ function GameController() {
   const [gameState, setGameState] = React.useState({
     state: "",
     turn: false,
+    isAdmin: false,
     myBoard: [],
     enemyBoard: [],
     match: {
@@ -25,7 +26,6 @@ function GameController() {
     });
 
     socket.current.on("game-state", (data) => {
-      console.log(data);
       setGameState(data);
     });
   }, []);
@@ -66,6 +66,7 @@ function GameController() {
     "main-menu": <Pages.MainMenu OnMenuSelect={OnMenuSelect} />,
     "match-room": (
       <Pages.MatchRoom
+        isAdmin={gameState.isAdmin}
         token={gameState.match.token}
         players={gameState.match.players}
         msgHistory={gameState.match.chat}
