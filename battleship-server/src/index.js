@@ -18,6 +18,7 @@ server.get("/", function (req, res) {
   res.json({ message: "Hello World!" });
 });
 
-http.listen(3001, function () {
-  console.log(`Servidor rodando em: ${process.env.APP_URL}`);
+const port = process.env.PORT || 3000;
+http.listen(port, function () {
+  console.log(`Servidor rodando em: ${process.env.APP_URL}:${port}`);
 });
