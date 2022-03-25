@@ -19,8 +19,8 @@ function GameController() {
   });
 
   React.useEffect(() => {
-    console.log("Reconnecting to socket");
-    socket.current = io("ws://localhost:3001");
+    console.log("Reconnecting to socket: ", process.env.REACT_APP_SERVER_URL);
+    socket.current = io(process.env.REACT_APP_SERVER_URL);
     socket.current.on("connection", () => {
       console.log("connected to server");
     });
