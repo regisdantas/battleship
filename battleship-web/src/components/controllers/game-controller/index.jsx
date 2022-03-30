@@ -1,7 +1,6 @@
 import React from "react";
 import io from "socket.io-client";
 import Pages from "../../views";
-import { useTransition, animated } from "react-spring";
 
 import "./style.css";
 
