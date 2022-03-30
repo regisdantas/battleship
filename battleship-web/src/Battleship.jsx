@@ -21,9 +21,6 @@ function Battleship() {
       <Header title="BATTLESHIP.io" />
       <NavBar navLinks={navLinks} />
       <section id="content-container">
-        {/* <MainMenu/> */}
-        {/* <GamePlay board={[[]]} turnMsg="Your turn"/>  */}
-        {/* <MatchRoom token="12345" players={["Regis", "Other"]} msgHistory="Ola meu amigo"/> */}
         <GameController />
       </section>
       <Footer />

@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+
 function PlayerJoin(props) {
   const { OnPlayerJoin } = props;
   const [name, setName] = React.useState("");

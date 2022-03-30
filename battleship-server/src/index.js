@@ -1,9 +1,14 @@
-require("dotenv").config();
-const server = require("express")();
-const http = require("http").createServer(server);
-const cors = require("cors");
+import dotEnv from "dotenv";
+dotEnv.config();
 
-const socket = require("socket.io")(http, {
+import serverClass from "express";
+const server = serverClass();
+import httpClass from "http";
+const http = httpClass.createServer(server);
+import cors from "cors";
+
+import * as socketClass from "socket.io";
+const socket = new socketClass.Server(http, {
   transports: ["polling"],
   cors: {
     origin: "*",
@@ -12,7 +17,8 @@ const socket = require("socket.io")(http, {
 
 server.use(cors());
 
-const game = require("./game")(socket);
+import gameClass from "./models/game-server.js";
+const game = gameClass(socket);
 
 server.get("/", function (req, res) {
   res.json({ message: "Hello World!" });

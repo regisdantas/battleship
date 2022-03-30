@@ -1,21 +1,23 @@
 import React from "react";
 import io from "socket.io-client";
 import Pages from "../../views";
+import { useTransition, animated } from "react-spring";
+
+import "./style.css";
 
 function GameController() {
   let socket = React.useRef();
-  const [gameState, setGameState] = React.useState({
-    state: "connecting",
-    turn: false,
-    isAdmin: false,
+  const [gameState, setGameState] = React.useState("connecting");
+  const [matchState, setMatchState] = React.useState({
+    token: "",
+    amIAdmin: false,
+    amIReady: false,
+    isMyTurn: false,
+    myShips: [],
     myBoard: [],
     enemyBoard: [],
-    match: {
-      token: "",
-      players: [],
-      chat: [],
-    },
-    ships: [],
+    playerNames: [],
+    chatHistory: [],
   });
 
   React.useEffect(() => {
@@ -28,7 +30,23 @@ function GameController() {
     socket.current.on("game-state", (data) => {
       setGameState(data);
     });
+
+    socket.current.on("match-state", (data) => {
+      setMatchState((lastMatchState) => ({
+        ...data,
+        isMyTurn: lastMatchState.isMyTurn,
+      }));
+      setTimeout(() => OnTurnTransitionTimeOut(data.isMyTurn), 1000);
+    });
   }, []);
+
+  const OnTurnTransitionTimeOut = (isMyTurn) => {
+    setMatchState((lastMatchState) => ({
+      ...lastMatchState,
+      isMyTurn: isMyTurn,
+    }));
+    console.log("Setting player turn to: ", isMyTurn);
+  };
 
   const OnPlayerJoin = (name) => {
     socket.current.emit("player-join", { name: name });
@@ -62,40 +80,42 @@ function GameController() {
   };
 
   const pagesByState = {
-    "connecting": <h3>Connecting to server...</h3>,
+    connecting: <h3>Connecting to server...</h3>,
     "player-join": <Pages.PlayerJoin OnPlayerJoin={OnPlayerJoin} />,
     "main-menu": <Pages.MainMenu OnMenuSelect={OnMenuSelect} />,
     "match-room": (
       <Pages.MatchRoom
-        isAdmin={gameState.isAdmin}
-        token={gameState.match.token}
-        players={gameState.match.players}
-        msgHistory={gameState.match.chat}
+        amIAdmin={matchState.amIAdmin}
+        token={matchState.token}
+        playerNames={matchState.playerNames}
+        chatHistory={matchState.chatHistory}
         onStart={OnStart}
         onSendMessage={OnSendMessage}
       />
     ),
     "board-arrange": (
       <Pages.BoardArrange
-        board={gameState.myBoard}
-        ships={gameState.ships}
+        board={matchState.myBoard}
+        myShips={matchState.myShips}
         onAutoArrange={OnAutoArrange}
         onReady={OnReady}
       />
     ),
     "game-play": (
       <Pages.GamePlay
-        board={gameState.turn ? gameState.enemyBoard : gameState.myBoard}
-        msgHistory={gameState.match.chat}
-        turnMsg={gameState.turn ? "Sua vez de jogar" : "Vez do oponente jogar"}
+        board={matchState.isMyTurn ? matchState.enemyBoard : matchState.myBoard}
+        chatHistory={matchState.chatHistory}
+        turnMsg={
+          matchState.isMyTurn ? "Sua vez de jogar" : "Vez do oponente jogar"
+        }
         onCellClick={OnCellClick}
         onSendMessage={OnSendMessage}
       />
     ),
   };
 
-  return pagesByState[gameState.state] ? (
-    pagesByState[gameState.state]
+  return pagesByState[gameState] ? (
+    pagesByState[gameState]
   ) : (
     <h3>Failed to connect to server!</h3>
   );

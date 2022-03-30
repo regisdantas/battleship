@@ -4,20 +4,19 @@ import Board from "../../elements/board";
 import "./style.css";
 
 function BoardArrange(props) {
-  const { board, ships, onAutoArrange, onReady } = props;
-  const [arrangedShips, setArrangedShips] = React.useState(ships);
+  const { board, myShips, onAutoArrange, onReady } = props;
+  const [arrangedShips, setArrangedShips] = React.useState(myShips);
   React.useEffect(() => {
-    setArrangedShips(ships);
-  }, [ships]);	
+    setArrangedShips(myShips);
+  }, [myShips]);
   return (
     <div id="arrange-container">
       <div id="board-session">
         <Board board={board} onCellClick={() => {}} />
       </div>
       <div id="ships-container">
-        {ships.map((ship, idx) => {
-          console.log(ship);
-          if (ship.position.x < 0 || ship.position.y < 0) {
+        {myShips.map((ship, idx) => {
+          if (ship.x < 0 || ship.y < 0) {
             return (
               <div className="ship-to-arrange" key={idx}>
                 {ship.health.map((health, idx) => {

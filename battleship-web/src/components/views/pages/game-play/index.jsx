@@ -4,7 +4,7 @@ import Board from "../../elements/board";
 import Chat from "../../elements/chat";
 
 function GamePlay(props) {
-  const { board, msgHistory, turnMsg, onCellClick, onSendMessage } = props;
+  const { board, chatHistory, turnMsg, onCellClick, onSendMessage } = props;
 
   return (
     <div id="game-container">
@@ -12,7 +12,7 @@ function GamePlay(props) {
         <Board board={board} onCellClick={onCellClick} />
         <h3>{turnMsg}</h3>
       </div>
-      <Chat msgHistory={msgHistory} onSendMessage={onSendMessage} />
+      <Chat chatHistory={chatHistory} onSendMessage={onSendMessage} />
     </div>
   );
 }
